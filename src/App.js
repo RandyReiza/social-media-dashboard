@@ -1,28 +1,30 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {jsonServerRestClient, Admin, Resource, Delete} from "admin-on-rest";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+import {UserList, UserEdit, UserCreate, UserShow, UserDelete} from "./Users";
+import {PostList, PostEdit, PostCreate, PostShow, PostDelete} from "./Posts";
+
+const App = () => (
+  <Admin
+    restClient={jsonServerRestClient("http://jsonplaceholder.typicode.com")}
+  >
+    <Resource
+      name="users"
+      list={UserList}
+      edit={UserEdit}
+      create={UserCreate}
+      remove={props => <Delete {...props} title={<UserDelete />} />}
+      show={UserShow}
+    />
+    <Resource
+      name="posts"
+      list={PostList}
+      edit={PostEdit}
+      create={PostCreate}
+      remove={props => <Delete {...props} title={<PostDelete />} />}
+      show={PostShow}
+    />
+  </Admin>
+);
 
 export default App;
