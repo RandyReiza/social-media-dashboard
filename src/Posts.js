@@ -14,17 +14,23 @@ import {
   Show,
   SimpleShowLayout,
   RichTextField,
-  ShowButton
+  ShowButton,
+  ReferenceManyField,
+  EmailField,
+  ReferenceField,
+  ChipField
 } from "admin-on-rest";
 
 // List Component
 export const PostList = props => (
-  <List {...props} sort={{ field: 'id', order: 'ASC' }}>
+  <List {...props} sort={{field: "id", order: "ASC"}}>
     <Datagrid>
       <TextField source="id" label="No" />
-      <TextField source="userId" />
       <TextField source="title" />
       <TextField source="body" />
+      <ReferenceField label="Posted by" source="userId" reference="users">
+        <ChipField source="name" />
+      </ReferenceField>
       <ShowButton />
       <EditButton />
       <DeleteButton />
@@ -38,6 +44,18 @@ export const PostShow = props => (
     <SimpleShowLayout>
       <TextField source="title" />
       <RichTextField source="body" />
+      <ReferenceField label="Posted by" source="userId" reference="users">
+        <TextField source="name" />
+      </ReferenceField>
+      <ReferenceManyField perPage={100} label="Comments by" reference="comments" target="postId">
+        <Datagrid>
+          <TextField source="name" />
+          <EmailField source="email" />
+          <TextField source="body" />
+          <EditButton />
+          <DeleteButton />
+        </Datagrid>
+      </ReferenceManyField>
     </SimpleShowLayout>
   </Show>
 );

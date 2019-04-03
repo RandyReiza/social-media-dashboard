@@ -12,17 +12,19 @@ import {
   DeleteButton,
   Show,
   SimpleShowLayout,
-  ShowButton
+  ShowButton,
+  ReferenceManyField,
+  EmailField
 } from "admin-on-rest";
 
 // List Component
 export const UserList = props => (
-  <List {...props} sort={{ field: 'id', order: 'ASC' }}>
+  <List {...props} sort={{field: "id", order: "ASC"}}>
     <Datagrid>
       <TextField source="id" />
       <TextField source="name" />
       <TextField source="username" />
-      <TextField source="email" />
+      <EmailField source="email" />
       <TextField source="address.street" label="adress" />
       <TextField source="phone" />
       <TextField source="website" />
@@ -40,11 +42,26 @@ export const UserShow = props => (
     <SimpleShowLayout>
       <TextField source="name" />
       <TextField source="username" />
-      <TextField source="email" />
-      <TextField source="address.street" />
+      <EmailField source="email" />
+      <TextField source="address.street" label="adress"  />
       <TextField source="phone" />
       <TextField source="website" />
-      <TextField source="company.name" />
+      <TextField source="company.name" label="company" />
+      <ReferenceManyField label="Posts" reference="posts" target="userId">
+        <Datagrid>
+          <TextField source="title" />
+          <TextField source="body" />
+          <ShowButton />
+          <EditButton />
+        </Datagrid>
+      </ReferenceManyField>
+      <ReferenceManyField label="Albums" reference="albums" target="userId">
+        <Datagrid>
+          <TextField source="title" />
+          <ShowButton />
+          <EditButton />
+        </Datagrid>
+      </ReferenceManyField>
     </SimpleShowLayout>
   </Show>
 );
@@ -56,10 +73,10 @@ export const UserCreate = props => (
       <TextInput source="name" />
       <TextInput source="username" />
       <TextInput source="email" />
-      <TextInput source="address.street" />
+      <TextInput source="address.street" label="adress" />
       <TextInput source="phone" />
       <TextInput source="website" />
-      <TextInput source="company.name" />
+      <TextInput source="company.name" label="company" />
     </SimpleForm>
   </Create>
 );
