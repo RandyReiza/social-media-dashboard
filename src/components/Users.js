@@ -104,5 +104,5 @@ export const UserEdit = props => (
 
 // Delete Component
 export const UserDelete = ({record}) => {
-  return <span>Delete {record ? `"${record.username}"` : ""}</span>;
+  return <span>Delete {record ? `"${record.name}"` : ""}</span>;
 };

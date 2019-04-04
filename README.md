@@ -66,3 +66,13 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+### `Note:`
+
+I use admin-on-rest framework to processing the data from the API, you can see in the "package.json" file, the version of admin-on-rest. You can see the documentation here: https://marmelab.com/admin-on-rest/
+
+Admin-on-rest is available from npm. You can install it (and its required dependencies) using:
+npm install admin-on-rest
+
+Install admin-on-rest is a must to run this app.

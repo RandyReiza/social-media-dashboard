@@ -9,6 +9,7 @@ import {PhotoList, PhotoShow, PhotoDelete} from "./Photos";
 
 const App = () => (
   <Admin
+    title="Social Media Dashboard"
     restClient={jsonServerRestClient("http://jsonplaceholder.typicode.com")}
   >
     <Resource
